@@ -11,7 +11,7 @@ import {
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const { user, logout } = useAuth()
-  const { theme, toggleTheme } = useTheme()
+  const { theme, resolvedTheme, toggleTheme } = useTheme()
   const location = useLocation()
 
   const navLinks = [
@@ -62,7 +62,7 @@ export default function Navbar() {
               style={{ background: 'var(--bg-tertiary)', color: 'var(--text-secondary)' }}
               aria-label="Toggle theme"
             >
-              {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+              {resolvedTheme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
             </button>
 
             {user ? (
@@ -140,8 +140,8 @@ export default function Navbar() {
                 className="px-4 py-3 rounded-xl text-sm font-medium flex items-center gap-3 cursor-pointer border-none text-left"
                 style={{ background: 'transparent', color: 'var(--text-secondary)' }}
               >
-                {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
-                {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+                {resolvedTheme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+                {resolvedTheme === 'dark' ? 'Light Mode' : 'Dark Mode'}
               </button>
 
               {user ? (

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useAuth } from '../context/AuthContext'
-import { Shield, Mail, Lock, User, Eye, EyeOff, ArrowRight } from 'lucide-react'
+import { Shield, Mail, Lock, User, Eye, EyeOff, ArrowRight, AlertCircle } from 'lucide-react'
 
 export default function Login() {
   const [isSignUp, setIsSignUp] = useState(false)
@@ -43,12 +43,15 @@ export default function Login() {
 
   const handleGoogle = async () => {
     setError('')
+    setLoading(true)
     const result = await loginWithGoogle()
-    if (result.success) {
+    if (result.success && !result.redirecting) {
       navigate('/dashboard')
-    } else {
+    } else if (!result.success) {
       setError(result.error)
     }
+    // If redirecting, page will navigate away
+    setLoading(false)
   }
 
   return (
@@ -76,7 +79,8 @@ export default function Login() {
           {/* Google Login */}
           <button
             onClick={handleGoogle}
-            className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-xl mb-4 cursor-pointer font-medium text-sm transition-all duration-200"
+            disabled={loading}
+            className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-xl mb-4 cursor-pointer font-medium text-sm transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
             style={{
               background: 'var(--bg-tertiary)',
               border: '1px solid var(--border-color)',
@@ -147,7 +151,11 @@ export default function Login() {
             </div>
 
             {error && (
-              <p className="text-xs px-1" style={{ color: '#ef4444' }}>{error}</p>
+              <div className="flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs"
+                style={{ background: '#ef444412', border: '1px solid #ef444420', color: '#ef4444' }}>
+                <AlertCircle size={14} style={{ flexShrink: 0 }} />
+                <span>{error}</span>
+              </div>
             )}
 
             <button

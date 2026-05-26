@@ -312,6 +312,37 @@ body {
   }
 }
 
+/* ===== ANALYZE TABS (MOBILE) ===== */
+.analyze-tabs-container {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.analyze-tabs-container::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .analyze-tabs-container {
+    width: 100% !important;
+    justify-content: stretch;
+  }
+  .analyze-tabs-container button {
+    flex: 1;
+    justify-content: center;
+    padding: 10px 12px !important;
+    font-size: 0.8rem;
+  }
+}
+
+/* ===== MOBILE TOUCH - Always show action buttons ===== */
+@media (hover: none) and (pointer: coarse) {
+  .group button.opacity-0 {
+    opacity: 1 !important;
+  }
+}
+
 /* ===== GLOW EFFECTS ===== */
 .glow-border {
   position: relative;
