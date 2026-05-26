@@ -22,7 +22,7 @@ Veritas AI is an advanced, AI-powered content and deepfake detection platform. B
 *   **Frontend:** React (Vite), Tailwind CSS, Framer Motion, Lucide Icons, Recharts
 *   **Backend / AI:** Google Gemini API (REST)
 *   **Authentication & Hosting:** Firebase
-*   **Routing:** React Router DOM
+*   **Routing:** React Router DOM 
 
 ## 🛠️ Installation & Setup
 
